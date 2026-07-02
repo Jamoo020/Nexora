@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { aiKnowledge, estimateCost, normalizeProjectType, recommendForIndustry } from "@/lib/ai-knowledge";
 
 const suggestedQuestions = [
@@ -68,6 +68,7 @@ export function AiConsultant() {
   const [input, setInput] = useState("");
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const openConsultant = () => setOpen(true);
 
@@ -79,7 +80,10 @@ export function AiConsultant() {
 
   const sendMessage = async (text: string) => {
     const newMessage = { role: "user" as const, text };
-    setMessages((prev) => [...prev, newMessage]);
+    setMessages((prev) => {
+      const next = [...prev, newMessage];
+      return next;
+    });
 
     setIsLoading(true);
     try {
@@ -111,6 +115,13 @@ export function AiConsultant() {
     setTimeout(() => handleSend(), 50);
   };
 
+  useEffect(() => {
+    if (!open) return;
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, open]);
+
   const leadSummary = useMemo(() => {
     if (!leadInfo.projectType) return "No project details yet.";
     const estimate = estimateCost({ projectType: leadInfo.projectType, hasAI: leadInfo.projectType.includes("AI"), hasSEO: true, hasMaintenance: true });
@@ -131,7 +142,7 @@ export function AiConsultant() {
 
       {open && (
         <div className="mt-3 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-2xl shadow-slate-900/10">
-          <div className="space-y-3">
+          <div id="ai-chat-scroll" ref={scrollRef} className="max-h-96 space-y-3 overflow-y-auto pr-1">
             {messages.map((message, index) => (
               <div key={index} className={message.role === "assistant" ? "rounded-3xl bg-slate-100 p-4 text-sm text-slate-900" : "rounded-3xl bg-cyan-400/10 p-4 text-sm text-[var(--foreground)]"}>
                 <p className="font-semibold uppercase tracking-[0.2em] text-xs text-slate-500">{message.role === "assistant" ? "Consultant" : "You"}</p>
