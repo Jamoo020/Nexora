@@ -3,6 +3,10 @@ import { aiKnowledge, estimateCost, normalizeProjectType, recommendForIndustry }
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+const HUGGING_FACE_API_KEY = process.env.HUGGING_FACE_API_KEY;
+const HUGGING_FACE_MODEL = process.env.HUGGING_FACE_MODEL ?? "google/flan-t5-small";
+const GPT4ALL_API_URL = process.env.GPT4ALL_API_URL;
+const GPT4ALL_API_KEY = process.env.GPT4ALL_API_KEY;
 
 function buildSystemPrompt() {
   return `You are Nexora's AI Digital Consultant. You must answer as an experienced Kenyan technology consultant working for Nexora. Use a professional, friendly, knowledgeable, patient, and consultative tone. Never answer like a generic AI. Focus on Nexora's services, pricing rules, packages, and practical recommendations. If the user asks for pricing, always provide a rough range with disclaimers. If the user asks for timelines or complex scope, recommend a consultation. Use company knowledge only from the Nexora knowledge base.`;
@@ -37,11 +41,8 @@ export async function POST(request: NextRequest) {
 
   const userMessages = body.messages.map((message: any) => ({ role: message.role, content: message.text }));
   const leadInfo = body.leadInfo;
-
-  if (!OPENAI_API_KEY) {
-    const lastUser = userMessages.reverse().find((message: { role: string; content: string }) => message.role === "user");
-    return NextResponse.json({ answer: createLocalResponse(lastUser?.content ?? "") });
-  }
+  const lastUser = userMessages.slice().reverse().find((message: { role: string; content: string }) => message.role === "user");
+  const userContent = lastUser?.content ?? "";
 
   const promptMessages = [
     { role: "system", content: buildSystemPrompt() + " " + buildKnowledgeSummary() },
@@ -57,29 +58,73 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: OPENAI_MODEL,
-        messages: promptMessages,
-        temperature: 0.6,
-        max_tokens: 450,
-      }),
-    });
+    let answer: string | null = null;
+    let shouldFallback = !OPENAI_API_KEY;
 
-    if (!response.ok) {
-      const errorBody = await response.text();
-      return NextResponse.json({ error: `OpenAI request failed: ${errorBody}` }, { status: 500 });
+    if (OPENAI_API_KEY) {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: OPENAI_MODEL,
+          messages: promptMessages,
+          temperature: 0.6,
+          max_tokens: 450,
+        }),
+      });
+
+      const text = await response.text();
+      if (response.ok) {
+        const data = JSON.parse(text);
+        answer = data?.choices?.[0]?.message?.content ?? null;
+      } else {
+        shouldFallback = true;
+      }
     }
 
-    const data = await response.json();
-    const answer = data?.choices?.[0]?.message?.content ?? "I’m sorry, I couldn’t generate a response right now.";
-    return NextResponse.json({ answer });
+    if (!answer && GPT4ALL_API_URL) {
+      const promptText = `${buildSystemPrompt()}\n${buildKnowledgeSummary()}\nUser: ${userContent}`;
+      const gpt4allResponse = await fetch(GPT4ALL_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(GPT4ALL_API_KEY ? { Authorization: `Bearer ${GPT4ALL_API_KEY}` } : {}),
+        },
+        body: JSON.stringify({ prompt: promptText, max_tokens: 200, temperature: 0.7 }),
+      });
+
+      if (gpt4allResponse.ok) {
+        const data = await gpt4allResponse.json();
+        answer = data?.text ?? data?.generated_text ?? null;
+      }
+    }
+
+    if (!answer && HUGGING_FACE_API_KEY) {
+      const hfPrompt = [
+        { role: "system", content: buildSystemPrompt() + " " + buildKnowledgeSummary() },
+        { role: "user", content: userContent },
+      ];
+
+      const hfResponse = await fetch(`https://api-inference.huggingface.co/v1/pipeline/text2text-generation/${HUGGING_FACE_MODEL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${HUGGING_FACE_API_KEY}`,
+        },
+        body: JSON.stringify({ inputs: `${hfPrompt.map((item) => item.content).join("\n")}`, parameters: { max_new_tokens: 200, temperature: 0.7 } }),
+      });
+
+      if (hfResponse.ok) {
+        const data = await hfResponse.json();
+        answer = Array.isArray(data) ? data[0]?.generated_text ?? null : null;
+      }
+    }
+
+    return NextResponse.json({ answer: answer ?? createLocalResponse(userContent) });
   } catch (error) {
-    return NextResponse.json({ error: "Unable to reach AI service." }, { status: 500 });
+    return NextResponse.json({ answer: createLocalResponse(userContent) });
   }
 }
