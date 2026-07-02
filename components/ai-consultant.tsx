@@ -142,6 +142,20 @@ export function AiConsultant() {
 
       {open && (
         <div className="mt-3 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-2xl shadow-slate-900/10">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Consultant</p>
+              <p className="text-sm font-semibold text-[var(--foreground)]">Nexora AI Digital Consultant</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-soft)] text-[var(--foreground)] transition hover:bg-[var(--surface)]"
+              aria-label="Close consultant"
+            >
+              ✕
+            </button>
+          </div>
           <div id="ai-chat-scroll" ref={scrollRef} className="max-h-96 space-y-3 overflow-y-auto pr-1">
             {messages.map((message, index) => (
               <div key={index} className={message.role === "assistant" ? "rounded-3xl bg-slate-100 p-4 text-sm text-slate-900" : "rounded-3xl bg-cyan-400/10 p-4 text-sm text-[var(--foreground)]"}>
