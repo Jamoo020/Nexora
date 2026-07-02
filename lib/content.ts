@@ -100,11 +100,29 @@ export const projects = [
     solution: "We built a polished ordering flow with real-time availability and smart upsell prompts.",
     stack: ["Next.js", "Stripe", "Analytics", "AI"],
   },
+  {
+    slug: "pharmapos-platform",
+    name: "Pharmapos Pharmacy Platform",
+    type: "Web Experience",
+    summary: "A pharmacy platform that brings prescription fulfillment, stock control, and customer service into one polished digital experience.",
+    challenge: "Manual inventory tracking and slow order processing were limiting pharmacy growth.",
+    solution: "We delivered a streamlined pharmacy portal with automated inventory alerts, order management, and stronger online customer engagement.",
+    stack: ["Next.js", "Tailwind CSS", "Inventory Automation", "SEO"],
+  },
+  {
+    slug: "motion-auto-website",
+    name: "Motion Auto Garage Website",
+    type: "Web Experience",
+    summary: "A premium automotive website for Motion Auto Garage, designed to increase service bookings and strengthen local brand trust.",
+    challenge: "Motion Auto Garage needed better online visibility and a simpler way to capture vehicle service requests.",
+    solution: "We built a modern garage website with clear service pages, easy appointment booking, and testimonial-driven credibility.",
+    stack: ["Next.js", "Tailwind CSS", "SEO", "Booking"],
+  },
 ];
 
 export const stats = [
-  { value: "120+", label: "Projects delivered" },
-  { value: "98%", label: "Client retention" },
+  { value: "50+", label: "Projects delivered" },
+  { value: "120+", label: "Businesses served" },
   { value: "24/7", label: "Support coverage" },
   { value: "4.9/5", label: "Average review" },
 ];
@@ -119,6 +137,7 @@ export const processSteps = [
 export const testimonials = [
   { quote: "Nexora transformed our digital presence from static to strategic. The growth was immediate and the experience felt premium.", author: "Amara Okafor", role: "Director, Studio North" },
   { quote: "Their team understood our workflow, our audience, and our ambition. The platform now feels like a true growth engine.", author: "Ibrahim Yusuf", role: "COO, Meridian Health" },
+  { quote: "Nexora delivered a website that made booking services effortless and helped Motion Garage stand out in our market. Their attention to detail was exactly what we needed.", author: "Timothy Karingo", role: "Owner, Motion Garage" },
 ];
 
 export const faqs = [
