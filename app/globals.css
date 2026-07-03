@@ -75,3 +75,4 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 [data-theme="light"] .from-slate-800 { --tw-gradient-from: rgba(241, 245, 249, 0.8) !important; }
 [data-theme="light"] .to-slate-950 { --tw-gradient-to: rgba(226, 232, 240, 0.95) !important; }
 [data-theme="light"] .from-cyan-500\/20 { --tw-gradient-from: rgba(34, 211, 238, 0.2) !important; }
+[data-theme="light"] .text-cyan-300 { color: #0f766e !important; }
