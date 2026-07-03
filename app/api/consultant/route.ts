@@ -1,36 +1,80 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildKnowledgePrompt, estimateCost, normalizeProjectType } from "@/lib/ai-knowledge";
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
-const HUGGING_FACE_API_KEY = process.env.HUGGING_FACE_API_KEY;
-const HUGGING_FACE_MODEL = process.env.HUGGING_FACE_MODEL ?? "google/flan-t5-small";
-const GPT4ALL_API_URL = process.env.GPT4ALL_API_URL;
-const GPT4ALL_API_KEY = process.env.GPT4ALL_API_KEY;
+import { generateGroqResponse, GroqMessage } from "@/lib/groq";
 
 function buildSystemPrompt() {
   return `You are Nexora's AI Digital Consultant. You must answer as an experienced Kenyan technology consultant working for Nexora. Use a professional, friendly, knowledgeable, patient, and consultative tone. Never answer like a generic AI. Focus on Nexora's services, pricing rules, packages, and practical recommendations. If the user asks for pricing, always provide a rough range with disclaimers. If the user asks for timelines or complex scope, recommend a consultation. Use company knowledge only from the Nexora knowledge base.`;
 }
 
-function buildKnowledgeSummary() {
-  return `Nexora is a Kenya-based digital consultancy focused on premium websites, web applications, AI solutions, automation, SEO, cloud infrastructure, and ongoing maintenance. Key services include landing pages, business websites, corporate websites, e-commerce, web applications, enterprise software, AI chatbots, automation, CRM, ERP, dashboards, mobile apps, cloud infrastructure, hosting, maintenance, SEO, UI/UX design, and digital consulting. Pricing ranges include: Landing Page KES 25,000-50,000; Business Website KES 60,000-120,000; Corporate Website KES 120,000-300,000; E-commerce KES 180,000-500,000; Web Application starts from KES 250,000; Enterprise Software is custom. Always qualify leads, collect contact info naturally, and hand off complex or enterprise-level requests to the Nexora team.`;
+function createLocalResponse(userText: string) {
+  const normalized = userText.trim().toLowerCase();
+  const projectType = inferProjectType(normalized);
+  const industry = inferIndustry(normalized);
+  const pageCount = inferPageCount(normalized);
+  const features = inferFeatures(normalized);
+  const timeline = inferTimeline(pageCount, features);
+  const priceRange = inferPriceRange(projectType, features);
+
+  const featureList = features.length > 0 ? `Features include: ${features.join(", ")}.` : "";
+  const industryText = industry ? `${industry} sector` : "a professional services or business sector";
+
+  return `🚨 LOCAL FALLBACK ACTIVATED - Based on your request, I recommend a ${projectType} for the ${industryText}. ${featureList} Estimated timeline: ${timeline}. Estimated cost range: ${priceRange}. A senior consultant would also recommend responsive design, SEO, lead capture, and future-ready automation where appropriate.`;
 }
 
-function createLocalResponse(userText: string) {
-  const text = userText.toLowerCase();
-  if (text.includes("cost") || text.includes("price") || text.includes("estimate")) {
-    return "🚨 LOCAL FALLBACK ACTIVATED - I can help with a very rough price range based on your project type, industry, AI needs, SEO, and maintenance. Please tell me more about the service you need and any key features.";
+function inferProjectType(text: string) {
+  if (text.includes("construction") || text.includes("building") || text.includes("contractor") || text.includes("developer")) {
+    return "Construction Website";
   }
-  if (text.includes("website") || text.includes("site")) {
-    return "🚨 LOCAL FALLBACK ACTIVATED - Nexora builds premium websites, corporate websites, e-commerce stores, and business sites for Kenyan companies. We focus on performance, SEO, mobile-first design, and strong conversion.";
+  if (text.includes("e-commerce") || text.includes("shop") || text.includes("store") || text.includes("catalog")) {
+    return "E-commerce Website";
   }
-  if (text.includes("ai") || text.includes("chatbot") || text.includes("automation")) {
-    return "🚨 AI FALLBACK - We can add AI chat assistants, intelligent workflows, and automation features that capture leads and improve customer experience. Tell me what business process you want to improve.";
+  if (text.includes("portal") || text.includes("dashboard") || text.includes("crm") || text.includes("system")) {
+    return "Business Platform";
   }
-  if (text.includes("timeline") || text.includes("launch")) {
-    return "🚨 LOCAL FALLBACK ACTIVATED - Most website projects take 4-8 weeks. Custom platforms and integrations usually need 8-14 weeks depending on scope and approvals.";
-  }
-  return "🚨 LOCAL FALLBACK ACTIVATED - Please share more about your project, business goals, and required features. I can recommend the best services and estimate a rough range.";
+  return text.includes("landing") ? "Landing Page" : "Business Website";
+}
+
+function inferIndustry(text: string) {
+  const industries = [
+    { keyword: "construction", label: "construction" },
+    { keyword: "real estate", label: "real estate" },
+    { keyword: "health", label: "healthcare" },
+    { keyword: "school", label: "education" },
+    { keyword: "hotel", label: "hospitality" },
+    { keyword: "finance", label: "fintech" },
+  ];
+  return industries.find((item) => text.includes(item.keyword))?.label ?? "general business";
+}
+
+function inferPageCount(text: string) {
+  const match = text.match(/(\d+)\s*(page|pages|screen|screens)/);
+  return match ? Number(match[1]) : 1;
+}
+
+function inferFeatures(text: string) {
+  const features: string[] = [];
+  if (text.includes("contact")) features.push("Contact Form");
+  if (text.includes("gallery") || text.includes("portfolio")) features.push("Project Gallery");
+  if (text.includes("seo") || text.includes("search engine")) features.push("SEO Optimization");
+  if (text.includes("whatsapp")) features.push("WhatsApp Integration");
+  if (text.includes("booking") || text.includes("appointment")) features.push("Booking System");
+  if (text.includes("login") || text.includes("user") || text.includes("dashboard")) features.push("User Portal");
+  if (text.includes("payment") || text.includes("checkout") || text.includes("shop")) features.push("Online Payments");
+  if (text.includes("analytics") || text.includes("tracking")) features.push("Analytics");
+  if (features.length === 0) features.push("Responsive Design", "Lead Capture", "Performance Optimization");
+  return features;
+}
+
+function inferTimeline(pageCount: number, features: string[]) {
+  const baseWeeks = pageCount <= 3 ? 4 : pageCount <= 7 ? 6 : 8;
+  const extra = features.includes("Online Payments") || features.includes("User Portal") ? 2 : 0;
+  return `${baseWeeks + extra} to ${baseWeeks + extra + 2} weeks`;
+}
+
+function inferPriceRange(projectType: string, features: string[]) {
+  const base = projectType.includes("E-commerce") ? 200000 : projectType.includes("Landing") ? 35000 : projectType.includes("Business") ? 80000 : 120000;
+  const extra = features.includes("Online Payments") || features.includes("User Portal") ? 40000 : 15000;
+  return `KES ${base + extra} - KES ${base + extra + 60000}`;
 }
 
 export async function POST(request: NextRequest) {
@@ -44,90 +88,24 @@ export async function POST(request: NextRequest) {
   const lastUser = userMessages.slice().reverse().find((message: { role: string; content: string }) => message.role === "user");
   const userContent = lastUser?.content ?? "";
 
-  const promptMessages = [
-    { role: "system", content: buildSystemPrompt() + "\n\n" + buildKnowledgePrompt() },
-    ...userMessages,
-  ];
-
   if (leadInfo && leadInfo.projectType) {
     const estimate = estimateCost({ projectType: leadInfo.projectType, hasAI: leadInfo.projectType.toLowerCase().includes("ai"), hasSEO: true, hasMaintenance: true });
-    promptMessages.push({
+    userMessages.push({
       role: "system",
       content: `Lead details: ${JSON.stringify(leadInfo)}. Use this to refine recommendations and cost guidance. Estimated package: ${estimate.package}, price range: KES ${estimate.estimatedRange.min} to KES ${estimate.estimatedRange.max}, timeline: ${estimate.timeline}.`,
     });
   }
 
   try {
-    let answer: string | null = null;
-    let shouldFallback = !OPENAI_API_KEY;
+    const groqMessages: GroqMessage[] = [
+      { role: "system", content: buildSystemPrompt() + "\n\n" + buildKnowledgePrompt() },
+      ...userMessages,
+    ];
 
-    if (OPENAI_API_KEY) {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: OPENAI_MODEL,
-          messages: promptMessages,
-          temperature: 0.6,
-          max_tokens: 450,
-        }),
-      });
-
-      const text = await response.text();
-      console.log("OPENAI STATUS:", response.status);
-      console.log("OPENAI BODY:", text);
-
-      if (response.ok) {
-        const data = JSON.parse(text);
-        answer = data?.choices?.[0]?.message?.content ?? null;
-      } else {
-        shouldFallback = true;
-      }
-    }
-
-    if (!answer && GPT4ALL_API_URL) {
-      const promptText = `${buildSystemPrompt()}\n\n${buildKnowledgePrompt()}\n\nUser: ${userContent}`;
-      const gpt4allResponse = await fetch(GPT4ALL_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(GPT4ALL_API_KEY ? { Authorization: `Bearer ${GPT4ALL_API_KEY}` } : {}),
-        },
-        body: JSON.stringify({ prompt: promptText, max_tokens: 200, temperature: 0.7 }),
-      });
-
-      if (gpt4allResponse.ok) {
-        const data = await gpt4allResponse.json();
-        answer = data?.text ?? data?.generated_text ?? null;
-      }
-    }
-
-    if (!answer && HUGGING_FACE_API_KEY) {
-      const hfPrompt = [
-        { role: "system", content: buildSystemPrompt() + "\n\n" + buildKnowledgePrompt() },
-        { role: "user", content: userContent },
-      ];
-
-      const hfResponse = await fetch(`https://api-inference.huggingface.co/v1/pipeline/text2text-generation/${HUGGING_FACE_MODEL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${HUGGING_FACE_API_KEY}`,
-        },
-        body: JSON.stringify({ inputs: `${hfPrompt.map((item) => item.content).join("\n")}`, parameters: { max_new_tokens: 200, temperature: 0.7 } }),
-      });
-
-      if (hfResponse.ok) {
-        const data = await hfResponse.json();
-        answer = Array.isArray(data) ? data[0]?.generated_text ?? null : null;
-      }
-    }
-
+    const answer = await generateGroqResponse(groqMessages);
     return NextResponse.json({ answer: answer ?? createLocalResponse(userContent) });
   } catch (error) {
+    console.error("Consultant route error", error);
     return NextResponse.json({ answer: createLocalResponse(userContent) });
   }
 }
