@@ -9,9 +9,17 @@ export function SiteFooter() {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">{siteConfig.name}</p>
           <h2 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">Premium technology for ambitious companies.</h2>
           <p className="mt-4 max-w-xl text-[var(--muted)]">We build digital products and growth systems that feel as polished as they perform.</p>
-          <div className="mt-6 flex flex-wrap gap-4 text-sm text-[var(--muted-strong)]">
-            <a href={`mailto:${siteConfig.email}`} className="transition hover:text-cyan-300">{siteConfig.email}</a>
-            <a href={`tel:${siteConfig.phone}`} className="transition hover:text-cyan-300">{siteConfig.phone}</a>
+          <div className="mt-6 space-y-1 text-sm text-[var(--muted-strong)]">
+            <div>
+              <span className="font-medium text-[var(--foreground)]">Email:</span>{' '}
+              <a href={`mailto:${siteConfig.email}`} className="transition hover:text-cyan-300">{siteConfig.email}</a>
+            </div>
+            <div>
+              <span className="font-medium text-[var(--foreground)]">Contact Us:</span>{' '}
+              <a href="tel:+254115568737" className="transition hover:text-cyan-300">+254 115568737</a>
+              {' '}or{' '}
+              <a href="tel:+254705005601" className="transition hover:text-cyan-300">+254 705005601</a>
+            </div>
           </div>
         </div>
         <div>
