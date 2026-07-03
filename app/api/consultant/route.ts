@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { aiKnowledge, estimateCost, normalizeProjectType, recommendForIndustry } from "@/lib/ai-knowledge";
+import { buildKnowledgePrompt, estimateCost, normalizeProjectType } from "@/lib/ai-knowledge";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
   const userContent = lastUser?.content ?? "";
 
   const promptMessages = [
-    { role: "system", content: buildSystemPrompt() + " " + buildKnowledgeSummary() },
+    { role: "system", content: buildSystemPrompt() + "\n\n" + buildKnowledgePrompt() },
     ...userMessages,
   ];
 
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!answer && GPT4ALL_API_URL) {
-      const promptText = `${buildSystemPrompt()}\n${buildKnowledgeSummary()}\nUser: ${userContent}`;
+      const promptText = `${buildSystemPrompt()}\n\n${buildKnowledgePrompt()}\n\nUser: ${userContent}`;
       const gpt4allResponse = await fetch(GPT4ALL_API_URL, {
         method: "POST",
         headers: {
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
 
     if (!answer && HUGGING_FACE_API_KEY) {
       const hfPrompt = [
-        { role: "system", content: buildSystemPrompt() + " " + buildKnowledgeSummary() },
+        { role: "system", content: buildSystemPrompt() + "\n\n" + buildKnowledgePrompt() },
         { role: "user", content: userContent },
       ];
 

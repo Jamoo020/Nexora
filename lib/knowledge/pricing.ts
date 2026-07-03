@@ -1,0 +1,18 @@
+export const pricingPrinciples = [
+  "Project complexity",
+  "Number of pages",
+  "Custom UI",
+  "Branding requirements",
+  "AI features",
+  "Automation",
+  "Integrations",
+  "User authentication",
+  "Dashboards",
+  "Hosting",
+  "Maintenance",
+  "Content writing",
+  "SEO",
+  "Timeline",
+  "Support",
+  "Third-party APIs",
+];
