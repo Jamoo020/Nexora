@@ -19,18 +19,18 @@ function buildKnowledgeSummary() {
 function createLocalResponse(userText: string) {
   const text = userText.toLowerCase();
   if (text.includes("cost") || text.includes("price") || text.includes("estimate")) {
-    return "I can help with a very rough price range based on your project type, industry, AI needs, SEO, and maintenance. Please tell me more about the service you need and any key features.";
+    return "🚨 LOCAL FALLBACK ACTIVATED - I can help with a very rough price range based on your project type, industry, AI needs, SEO, and maintenance. Please tell me more about the service you need and any key features.";
   }
   if (text.includes("website") || text.includes("site")) {
-    return "Nexora builds premium websites, corporate websites, e-commerce stores, and business sites for Kenyan companies. We focus on performance, SEO, mobile-first design, and strong conversion.";
+    return "🚨 LOCAL FALLBACK ACTIVATED - Nexora builds premium websites, corporate websites, e-commerce stores, and business sites for Kenyan companies. We focus on performance, SEO, mobile-first design, and strong conversion.";
   }
   if (text.includes("ai") || text.includes("chatbot") || text.includes("automation")) {
-    return "We can add AI chat assistants, intelligent workflows, and automation features that capture leads and improve customer experience. Tell me what business process you want to improve.";
+    return "🚨 AI FALLBACK - We can add AI chat assistants, intelligent workflows, and automation features that capture leads and improve customer experience. Tell me what business process you want to improve.";
   }
   if (text.includes("timeline") || text.includes("launch")) {
-    return "Most website projects take 4-8 weeks. Custom platforms and integrations usually need 8-14 weeks depending on scope and approvals.";
+    return "🚨 LOCAL FALLBACK ACTIVATED - Most website projects take 4-8 weeks. Custom platforms and integrations usually need 8-14 weeks depending on scope and approvals.";
   }
-  return "Please share more about your project, business goals, and required features. I can recommend the best services and estimate a rough range.";
+  return "🚨 LOCAL FALLBACK ACTIVATED - Please share more about your project, business goals, and required features. I can recommend the best services and estimate a rough range.";
 }
 
 export async function POST(request: NextRequest) {
@@ -77,6 +77,9 @@ export async function POST(request: NextRequest) {
       });
 
       const text = await response.text();
+      console.log("OPENAI STATUS:", response.status);
+      console.log("OPENAI BODY:", text);
+
       if (response.ok) {
         const data = JSON.parse(text);
         answer = data?.choices?.[0]?.message?.content ?? null;
