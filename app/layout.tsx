@@ -14,6 +14,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full antialiased">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('brentiq-theme');
+                if (theme === 'dark' || (theme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.dataset.theme = 'dark';
+                } else {
+                  document.documentElement.dataset.theme = 'light';
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
