@@ -147,6 +147,40 @@ export const faqs = [
 ];
 
 export const blogPosts = [
-  { title: "Why premium websites outperform templated experiences", summary: "A practical guide to building trust and conversion with intentional design and speed.", href: "/blog" },
-  { title: "AI automation for modern service businesses", summary: "How to use automation to reduce overhead without compromising the customer experience.", href: "/blog" },
+  {
+    title: "Why premium websites outperform templated experiences",
+    summary: "A practical guide to building trust and conversion with intentional design, speed, and clear positioning.",
+    insight: "The best web experiences feel effortless because the strategy, visuals, and content are aligned around the customer journey.",
+    href: "/blog",
+    category: "Web Strategy",
+    readTime: "6 min read",
+    tags: ["UX", "SEO", "Conversion"],
+  },
+  {
+    title: "AI automation for modern service businesses",
+    summary: "How to use automation to reduce overhead without compromising the customer experience or team morale.",
+    insight: "The smartest automations remove repetitive work first, then create room for better service, faster response, and stronger retention.",
+    href: "/blog",
+    category: "Automation",
+    readTime: "5 min read",
+    tags: ["AI", "Operations", "Growth"],
+  },
+  {
+    title: "What good technical SEO looks like in 2026",
+    summary: "A practical view on search performance, site structure, and content systems that help businesses stay discoverable.",
+    insight: "Technical SEO is most effective when your site architecture and content planning support both users and search engines at the same time.",
+    href: "/blog",
+    category: "SEO",
+    readTime: "7 min read",
+    tags: ["Search", "Performance", "Content"],
+  },
+  {
+    title: "How to turn a website into a revenue engine",
+    summary: "A closer look at the content, messaging, and conversion design choices that help websites do more than look polished.",
+    insight: "A high-performing website is a system of trust signals, clear offers, and friction-free pathways that guide visitors toward action.",
+    href: "/blog",
+    category: "Growth",
+    readTime: "8 min read",
+    tags: ["Strategy", "Funnels", "Brand"],
+  },
 ];
