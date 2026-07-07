@@ -3,8 +3,8 @@ import { SectionHeading } from "@/components/section-heading";
 import { projects } from "@/lib/content";
 
 export const metadata = {
-  title: "Projects - Nexora Kenya | Portfolio of Digital Solutions",
-  description: "Explore Nexora's portfolio of premium web design, software development, and digital transformation projects for Kenyan businesses.",
+  title: "Projects - Brentiq Kenya | Portfolio of Digital Solutions",
+  description: "Explore Brentiq's portfolio of premium web design, software development, and digital transformation projects for Kenyan businesses.",
 };
 
 export default function ProjectsPage() {

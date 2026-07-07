@@ -1,8 +1,8 @@
 import { SectionHeading } from "@/components/section-heading";
 
 export const metadata = {
-  title: "Privacy Policy - Nexora",
-  description: "Nexora privacy policy placeholder.",
+  title: "Privacy Policy - Brentiq",
+  description: "Brentiq privacy policy placeholder.",
 };
 
 export default function PrivacyPage() {
@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           <SectionHeading eyebrow="Legal" title="Privacy Policy" description="This is a placeholder privacy policy. Please review and replace with your final policy." />
           <div className="mt-8 prose max-w-none text-muted">
             <p>Last updated: [Insert date]</p>
-            <p>This Privacy Policy explains how Nexora ("we", "our", "us") collects, uses, and discloses information when you use our website and services. This is a placeholder policy — please review and adapt it to your requirements or consult legal counsel.</p>
+            <p>This Privacy Policy explains how Brentiq ("we", "our", "us") collects, uses, and discloses information when you use our website and services. This is a placeholder policy — please review and adapt it to your requirements or consult legal counsel.</p>
             <h3>1. Information We Collect</h3>
             <ul>
               <li>Information you provide: contact details, account information, messages, and any content you submit.</li>
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             <h3>8. Changes to This Policy</h3>
             <p>We may update this policy; material changes will be posted with a new effective date.</p>
             <h3>9. Contact</h3>
-            <p>For questions about this policy, contact us at info@nexora.co.ke.</p>
+            <p>For questions about this policy, contact us at info@brentiq.co.ke.</p>
             <p className="mt-6 text-sm text-muted">This template is for convenience and does not constitute legal advice.</p>
           </div>
         </div>

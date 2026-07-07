@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { aiKnowledge, estimateCost, normalizeProjectType, recommendForIndustry } from "@/lib/ai-knowledge";
+import { estimateCost } from "@/lib/ai-knowledge";
 
 const suggestedQuestions = [
   "Can you review my project idea?",
@@ -49,7 +49,7 @@ function getResponse(message: string) {
   }
 
   if (text.includes("website") || text.includes("site")) {
-    return "Nexora builds premium websites, corporate sites, and landing pages tailored to your business. We focus on performance, SEO, and conversion for the Kenyan market.";
+    return "Brentiq builds premium websites, corporate sites, and landing pages tailored to your business. We focus on performance, SEO, and conversion for the Kenyan market.";
   }
 
   if (text.includes("timeline") || text.includes("launch")) {
@@ -63,19 +63,21 @@ export function AiConsultant() {
   const [open, setOpen] = useState(false);
   const [leadInfo, setLeadInfo] = useState<LeadInfo>(defaultLeadInfo);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "assistant", text: "Hello, I’m Nexora’s AI Digital Consultant. Tell me about your project or ask how we can help your business." },
+    { role: "assistant", text: "Hello, I’m Brentiq’s AI Digital Consultant. Tell me about your project or ask how we can help your business." },
   ]);
   const [input, setInput] = useState("");
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchSummary, setSearchSummary] = useState("");
+  const [proposalSummary, setProposalSummary] = useState("");
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const openConsultant = () => setOpen(true);
 
   useEffect(() => {
     const handleOpen = () => setOpen(true);
-    window.addEventListener("nexora-ai-consultant-open", handleOpen);
-    return () => window.removeEventListener("nexora-ai-consultant-open", handleOpen);
+    window.addEventListener("brentiq-ai-consultant-open", handleOpen);
+    return () => window.removeEventListener("brentiq-ai-consultant-open", handleOpen);
   }, []);
 
   const sendMessage = async (text: string) => {
@@ -86,18 +88,25 @@ export function AiConsultant() {
     });
 
     setIsLoading(true);
+    const messageHistory = [...messages, newMessage];
+    setMessages((prev) => [...prev, newMessage]);
+
     try {
       const response = await fetch("/api/consultant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, newMessage], leadInfo }),
+        body: JSON.stringify({ messages: messageHistory, leadInfo }),
       });
 
       const data = await response.json();
       const assistantText = data.answer ?? data.error ?? "I’m sorry, I couldn’t process your request right now.";
-      setMessages((prev) => [...prev, { role: "assistant", text: assistantText }] );
+      setMessages((prev) => [...prev, { role: "assistant", text: assistantText }]);
+      setSearchSummary(data.search ?? "");
+      setProposalSummary(data.proposal ?? "");
     } catch (error) {
       setMessages((prev) => [...prev, { role: "assistant", text: "I’m unable to reach the AI service right now. Please try again later." }]);
+      setSearchSummary("");
+      setProposalSummary("");
     } finally {
       setIsLoading(false);
     }
@@ -136,7 +145,7 @@ export function AiConsultant() {
           onClick={() => setOpen((value) => !value)}
           className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--foreground)] shadow-lg shadow-slate-900/10 transition hover:bg-[var(--surface-soft)]"
         >
-          {open ? "Close Nexora Consultant" : "Open Nexora Consultant"}
+          {open ? "Close Brentiq Consultant" : "Open Brentiq Consultant"}
         </button>
       </div>
 
@@ -145,7 +154,7 @@ export function AiConsultant() {
           <div className="mb-4 flex items-center justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Consultant</p>
-              <p className="text-sm font-semibold text-[var(--foreground)]">Nexora AI Digital Consultant</p>
+              <p className="text-sm font-semibold text-[var(--foreground)]">Brentiq AI Digital Consultant</p>
             </div>
             <button
               type="button"
@@ -199,6 +208,20 @@ export function AiConsultant() {
             <p className="text-sm font-semibold text-[var(--foreground)]">Project estimator</p>
             <p className="mt-2 text-sm text-muted">{leadSummary}</p>
           </div>
+
+          {searchSummary && (
+            <div className="mt-4 rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
+              <p className="text-sm font-semibold text-[var(--foreground)]">Live market research</p>
+              <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{searchSummary}</pre>
+            </div>
+          )}
+
+          {proposalSummary && (
+            <div className="mt-4 rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
+              <p className="text-sm font-semibold text-[var(--foreground)]">Latest proposal</p>
+              <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{proposalSummary}</pre>
+            </div>
+          )}
 
           <button
             type="button"

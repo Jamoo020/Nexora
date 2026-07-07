@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { services } from "@/lib/content";
 
 export const metadata = {
-  title: "Solutions - Nexora Kenya | Software & Web Services",
+  title: "Solutions - Brentiq Kenya | Software & Web Services",
   description: "Custom software development, web design, AI automation, and cloud solutions for Kenyan businesses. Premium digital products built to scale.",
 };
 
@@ -30,7 +30,7 @@ export default function SolutionsPage() {
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="rounded-[32px] border border-cyan-400/20 bg-slate-900/80 p-10">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">Ready to scale</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">Bring your next product, platform, or campaign to life with Nexora.</h2>
+            <h2 className="mt-4 text-3xl font-semibold text-white">Bring your next product, platform, or campaign to life with Brentiq.</h2>
             <p className="mt-4 max-w-2xl text-slate-300">We help companies move from fragmented tools to premium digital experiences that create real business value.</p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/contact" className="rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950">Start your project</Link>

@@ -2,7 +2,7 @@
 
 Last updated: [Insert date]
 
-This Privacy Policy explains how Nexora ("we", "our", "us") collects, uses, and discloses information when you use our website and services. This is a placeholder policy — please review and adapt it to your requirements or consult legal counsel.
+This Privacy Policy explains how Brentiq ("we", "our", "us") collects, uses, and discloses information when you use our website and services. This is a placeholder policy — please review and adapt it to your requirements or consult legal counsel.
 
 ## 1. Information We Collect
 - Information you provide: contact details, account information, messages, and any content you submit.
@@ -32,7 +32,7 @@ Depending on your jurisdiction, you may have rights such as access, correction, 
 We may update this policy; material changes will be posted with a new effective date.
 
 ## 9. Contact
-For questions about this policy, contact us at info@nexora.co.ke.
+For questions about this policy, contact us at info@brentiq.co.ke.
 
 ---
 This template is for convenience and does not constitute legal advice.

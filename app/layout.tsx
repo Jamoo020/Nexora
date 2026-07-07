@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { AiChatbot } from "@/components/ai-chatbot";
 import { AiConsultant } from "@/components/ai-consultant";
 
 export const metadata: Metadata = {
-  title: "Nexora | Engineering Digital Experiences",
-  description: "Nexora builds premium websites, enterprise web applications, and AI automation systems for ambitious companies.",
-  keywords: ["Nexora", "software development", "AI automation", "SEO optimized websites", "premium web design"],
-  openGraph: { title: "Nexora | Engineering Digital Experiences", description: "Premium digital products and growth-focused technology for modern businesses.", type: "website", locale: "en_US" },
+  title: "Brentiq | Engineering Digital Experiences",
+  description: "Brentiq builds premium websites, enterprise web applications, and AI automation systems for ambitious companies.",
+  keywords: ["Brentiq", "software development", "AI automation", "SEO optimized websites", "premium web design"],
+  openGraph: { title: "Brentiq | Engineering Digital Experiences", description: "Premium digital products and growth-focused technology for modern businesses.", type: "website", locale: "en_US" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -20,7 +19,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           {children}
           <SiteFooter />
-          <AiChatbot />
           <AiConsultant />
         </div>
       </body>

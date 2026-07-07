@@ -20,6 +20,23 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment setup
+
+Create a local environment file from the sample and fill in your keys:
+
+```bash
+cp .env.example .env.local
+```
+
+Then add:
+
+- `GROQ_API_KEY` — required for AI responses
+- `GROQ_MODEL` — optional; defaults to `llama-3.3-70b-versatile`
+- `SERPAPI_KEY` — optional for live Google search
+- `BING_API_KEY` — optional for live Bing search
+
+Provide either `SERPAPI_KEY` or `BING_API_KEY` if you want the consultant to return live market/trends data.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -3,8 +3,8 @@ import { SectionHeading } from "@/components/section-heading";
 import { siteConfig } from "@/lib/content";
 
 export const metadata = {
-  title: "Contact Nexora - Software Development Kenya | Get Started",
-  description: "Get in touch with Nexora in Mombasa, Kenya. Let's discuss your digital transformation project. Call 0115568737 or email info@nexora.co.ke",
+  title: "Contact Brentiq - Software Development Kenya | Get Started",
+  description: "Get in touch with Brentiq in Mombasa, Kenya. Let's discuss your digital transformation project. Call 0115568737 or email info@brentiq.co.ke",
 };
 
 export default function ContactPage() {
@@ -13,7 +13,7 @@ export default function ContactPage() {
       <section className="border-b border-theme py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-10">
           <div>
-            <SectionHeading eyebrow="Contact Nexora" title="Let's build something exceptional for your Kenyan business." description="Based in Mombasa and serving the entire Kenya market. Share your project goals, timeline, and vision. We'll respond promptly with a clear path forward." />
+            <SectionHeading eyebrow="Contact Brentiq" title="Let's build something exceptional for your Kenyan business." description="Based in Mombasa and serving the entire Kenya market. Share your project goals, timeline, and vision. We'll respond promptly with a clear path forward." />
             <div className="mt-8 space-y-4 text-muted">
               <p>📧 {siteConfig.email}</p>
               <p>📱 {siteConfig.phone}</p>

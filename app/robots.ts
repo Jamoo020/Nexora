@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/private/"],
     },
-    sitemap: "https://nexora.co/sitemap.xml",
+    sitemap: "https://brentiq.co/sitemap.xml",
   };
 }

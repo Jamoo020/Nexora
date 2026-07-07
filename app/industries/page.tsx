@@ -3,8 +3,8 @@ import { SectionHeading } from "@/components/section-heading";
 import { industries } from "@/lib/content";
 
 export const metadata = {
-  title: "Industries - Nexora Kenya | Tailored Solutions for Kenyan Sectors",
-  description: "Nexora builds tailored digital solutions for Kenya's key industries - construction, healthcare, education, finance, and more. Custom software and web design for Kenyan businesses.",
+  title: "Industries - Brentiq Kenya | Tailored Solutions for Kenyan Sectors",
+  description: "Brentiq builds tailored digital solutions for Kenya's key industries - construction, healthcare, education, finance, and more. Custom software and web design for Kenyan businesses.",
 };
 
 export default function IndustriesPage() {

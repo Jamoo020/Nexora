@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "nexora-theme";
+const STORAGE_KEY = "brentiq-theme";
 
 type Theme = "light" | "dark";
 

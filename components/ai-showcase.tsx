@@ -5,7 +5,7 @@ import Link from "next/link";
 export function AiShowcase() {
   const openConsultant = () => {
     if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("nexora-ai-consultant-open"));
+      window.dispatchEvent(new CustomEvent("brentiq-ai-consultant-open"));
     }
   };
 
@@ -13,7 +13,7 @@ export function AiShowcase() {
     <section className="bg-[var(--surface)] py-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">Nexora AI Consultant</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">Brentiq AI Consultant</p>
           <h2 className="mt-4 text-4xl font-semibold text-[var(--foreground)] sm:text-5xl">Smart AI guidance for modern digital projects.</h2>
           <p className="mt-6 text-lg leading-8 text-[var(--muted)]">Use the AI consultant to qualify your project, explore service options, estimate costs, and receive practical guidance for building a stronger online business.</p>
         </div>
@@ -37,7 +37,7 @@ export function AiShowcase() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-[var(--muted)]">Ready to show visitors a smarter way to engage with Nexora?</p>
+          <p className="text-sm text-[var(--muted)]">Ready to show visitors a smarter way to engage with Brentiq?</p>
           <div className="flex flex-wrap gap-3">
             <Link href="/contact" className="rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300">Book a consultation</Link>
             <button

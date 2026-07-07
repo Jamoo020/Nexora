@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Nexora",
+  name: "Brentiq",
   tagline: "Engineering Digital Experiences.",
-  description: "Nexora builds premium web experiences, intelligent automation, and high-performing digital products for ambitious Kenyan companies. Software development, web design, and digital transformation solutions across Kenya.",
-  email: "info@nexora.co.ke",
+  description: "Brentiq builds premium web experiences, intelligent automation, and high-performing digital products for ambitious Kenyan companies. Software development, web design, and digital transformation solutions across Kenya.",
+  email: "info@brentiq.co.ke",
   phone: "0115568737",
   address: "Mombasa, Kenya",
   serviceArea: "Across Kenya",
@@ -135,15 +135,15 @@ export const processSteps = [
 ];
 
 export const testimonials = [
-  { quote: "Nexora transformed our digital presence from static to strategic. The growth was immediate and the experience felt premium.", author: "Amara Okafor", role: "Director, Studio North" },
+  { quote: "Brentiq transformed our digital presence from static to strategic. The growth was immediate and the experience felt premium.", author: "Amara Okafor", role: "Director, Studio North" },
   { quote: "Their team understood our workflow, our audience, and our ambition. The platform now feels like a true growth engine.", author: "Ibrahim Yusuf", role: "COO, Meridian Health" },
-  { quote: "Nexora delivered a website that made booking services effortless and helped Motion Garage stand out in our market. Their attention to detail was exactly what we needed.", author: "Timothy Karingo", role: "Owner, Motion Garage" },
+  { quote: "Brentiq delivered a website that made booking services effortless and helped Motion Garage stand out in our market. Their attention to detail was exactly what we needed.", author: "Timothy Karingo", role: "Owner, Motion Garage" },
 ];
 
 export const faqs = [
-  { question: "How quickly can Nexora launch a new website?", answer: "Most premium website builds begin within two weeks and launch in a tightly managed sprint timeline based on scope." },
+  { question: "How quickly can Brentiq launch a new website?", answer: "Most premium website builds begin within two weeks and launch in a tightly managed sprint timeline based on scope." },
   { question: "Do you support ongoing maintenance?", answer: "Yes. We provide maintenance, hosting, performance tuning, and roadmap support for long-term growth." },
-  { question: "Can Nexora build internal business systems?", answer: "Absolutely. We build portals, automations, dashboards, and custom applications that connect your teams and data." },
+  { question: "Can Brentiq build internal business systems?", answer: "Absolutely. We build portals, automations, dashboards, and custom applications that connect your teams and data." },
 ];
 
 export const blogPosts = [

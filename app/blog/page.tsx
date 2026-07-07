@@ -3,8 +3,8 @@ import { SectionHeading } from "@/components/section-heading";
 import { blogPosts } from "@/lib/content";
 
 export const metadata = {
-  title: "Insights | Nexora",
-  description: "Read Nexora's insights on premium web design, digital transformation, AI automation, and technical SEO.",
+  title: "Insights | Brentiq",
+  description: "Read Brentiq's insights on premium web design, digital transformation, AI automation, and technical SEO.",
 };
 
 export default function BlogPage() {
