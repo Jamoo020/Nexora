@@ -61,6 +61,10 @@ export default function BlogPage() {
                   <h3 className="mt-6 text-2xl font-semibold text-theme">{post.title}</h3>
                   <p className="mt-4 text-muted">{post.summary}</p>
                   <p className="mt-4 text-sm leading-7 text-muted">{post.insight}</p>
+                  <div className="mt-6 rounded-[16px] border border-theme/50 bg-surface-soft p-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Consultant's Recommendation</p>
+                    <p className="mt-2 text-sm leading-6 text-muted">{post.consultant}</p>
+                  </div>
                   <div className="mt-6 flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <span key={tag} className="rounded-full border border-theme px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-muted">
@@ -70,7 +74,7 @@ export default function BlogPage() {
                   </div>
                   <div className="mt-8">
                     <Link href={post.href} className="text-sm font-semibold text-cyan-300">
-                      Explore this topic →
+                      Read this article →
                     </Link>
                   </div>
                 </article>
