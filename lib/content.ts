@@ -22,51 +22,61 @@ export const services = [
   {
     title: "Website design & development",
     description: "Responsive, conversion-first websites that build trust and drive leads for businesses across Kenya.",
+    backgroundImage: "https://images.unsplash.com/photo-1502882703501-1f7d3f3f1f0b?auto=format&fit=crop&w=1400&q=80",
     points: ["Mobile-first & accessible", "Local SEO optimisations", "Clear conversion paths"],
   },
   {
     title: "Custom web applications",
     description: "Scalable platforms and portals tailored to your operations, workflows, and user needs.",
+    backgroundImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
     points: ["Secure, maintainable architecture", "Role-based access", "Custom integrations"],
   },
   {
     title: "E‑commerce & online ordering",
     description: "High-converting storefronts with payment, inventory, and order management to grow online sales.",
+    backgroundImage: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80",
     points: ["Payments & checkout optimisation", "Inventory workflows", "Marketing integration"],
   },
   {
     title: "AI chatbots & automation",
     description: "Conversational assistants and automation that reduce support load and automate routine work.",
+    backgroundImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80",
     points: ["FAQ automation", "Lead qualification", "Task orchestration"],
   },
   {
     title: "Machine learning & data workflows",
     description: "Predictive models, analytics pipelines, and BI that turn data into actionable insights.",
+    backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
     points: ["Data pipelines & ETL", "Custom ML models", "Dashboards & reporting"],
   },
   {
     title: "API integrations & headless CMS",
     description: "Connect your tools and content systems for flexible, future-proof digital products.",
+    backgroundImage: "https://images.unsplash.com/photo-1526378723115-9f9c7b2e6f0d?auto=format&fit=crop&w=1400&q=80",
     points: ["Headless CMS setup", "Third-party API integrations", "Sync & automation"],
   },
   {
     title: "SEO & content optimisation",
     description: "Technical SEO, local search and content strategy to improve discoverability and organic traffic.",
+    backgroundImage: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1400&q=80",
     points: ["Technical audits", "Local SEO", "Content planning"],
   },
   {
     title: "Hosting, maintenance & support",
     description: "Secure hosting, monitoring, backups and SLA-backed maintenance so your product stays reliable.",
+    backgroundImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80",
     points: ["Managed hosting", "Backups & monitoring", "Priority support plans"],
   },
   {
     title: "Branding, UI/UX & product design",
     description: "Conversion-first design systems and brand work that make products feel premium and usable.",
+    backgroundImage: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1400&q=80",
     points: ["Design systems", "User research", "Prototype & testing"],
   },
   {
     title: "Security & compliance",
     description: "Application security reviews, hardening recommendations, and privacy guidance for peace of mind.",
+    backgroundImage: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1400&q=80",
     points: ["Security audits", "Hardening & best practices", "Compliance guidance"],
   },
 ];

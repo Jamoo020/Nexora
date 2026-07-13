@@ -60,14 +60,23 @@ export default function Home() {
           <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {services.map((service, idx) => (
-              <article key={service.title} className={`rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur ${idx % 3 === 0 ? 'section-bg-image section-bg-1' : ''}`}>
-                <div className="section-content">
+              <article
+                key={service.title}
+                className={`rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur service-card`}
+                style={{
+                  background: 'transparent',
+                }}
+              >
+                <div className="service-content" style={{ zIndex: 10 }}>
                   <h3 className="text-xl font-semibold text-theme">{service.title}</h3>
                   <p className="mt-4 text-muted">{service.description}</p>
                   <ul className="mt-6 space-y-2 text-sm text-muted-strong">
                     {service.points.map((point) => (<li key={point}>• {point}</li>))}
                   </ul>
                 </div>
+                <style jsx>{`
+                  article[title="${service.title}"]::before { background-image: url('${service.backgroundImage}'); }
+                `}</style>
               </article>
             ))}
           </div>
