@@ -59,13 +59,15 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {services.map((service) => (
-              <article key={service.title} className="rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur">
-                <h3 className="text-xl font-semibold text-theme">{service.title}</h3>
-                <p className="mt-4 text-muted">{service.description}</p>
-                <ul className="mt-6 space-y-2 text-sm text-muted-strong">
-                  {service.points.map((point) => (<li key={point}>• {point}</li>))}
-                </ul>
+            {services.map((service, idx) => (
+              <article key={service.title} className={`rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur ${idx % 3 === 0 ? 'section-bg-image section-bg-1' : ''}`}>
+                <div className="section-content">
+                  <h3 className="text-xl font-semibold text-theme">{service.title}</h3>
+                  <p className="mt-4 text-muted">{service.description}</p>
+                  <ul className="mt-6 space-y-2 text-sm text-muted-strong">
+                    {service.points.map((point) => (<li key={point}>• {point}</li>))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>
@@ -159,9 +161,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-20">
+      <section className="bg-slate-950 py-20 section-bg-image section-bg-2">
         <div className="mx-auto max-w-7xl rounded-[32px] border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 to-slate-900 px-6 py-16 sm:px-8 lg:px-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between section-content">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">Start your project</p>
               <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Let’s create something exceptional together.</h2>
