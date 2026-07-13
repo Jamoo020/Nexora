@@ -20,24 +20,54 @@ export const navigation = [
 
 export const services = [
   {
-    title: "Premium Website Development",
-    description: "Launch a polished, SEO-ready digital experience that earns trust instantly. Optimized for Kenya market visibility.",
-    points: ["Kenya-focused SEO", "Mobile-first design", "Conversion optimization"],
+    title: "Website design & development",
+    description: "Responsive, conversion-first websites that build trust and drive leads for businesses across Kenya.",
+    points: ["Mobile-first & accessible", "Local SEO optimisations", "Clear conversion paths"],
   },
   {
-    title: "Enterprise Web Applications",
-    description: "Powerful platforms for Kenyan businesses - operations, customer portals, and internal workflows.",
-    points: ["Scalable architecture", "Secure APIs", "Custom integrations"],
+    title: "Custom web applications",
+    description: "Scalable platforms and portals tailored to your operations, workflows, and user needs.",
+    points: ["Secure, maintainable architecture", "Role-based access", "Custom integrations"],
   },
   {
-    title: "AI Automation & SaaS",
-    description: "Turn repetitive work into elegant systems. Designed for Kenya's growing tech ecosystem.",
-    points: ["Business automation", "AI-powered solutions", "Smart dashboards"],
+    title: "E‑commerce & online ordering",
+    description: "High-converting storefronts with payment, inventory, and order management to grow online sales.",
+    points: ["Payments & checkout optimisation", "Inventory workflows", "Marketing integration"],
   },
   {
-    title: "Cloud, DevOps & Infrastructure",
-    description: "Reliable infrastructure built for stability and growth. Optimized for Kenya and East Africa.",
-    points: ["Cloud architecture", "Performance optimization", "24/7 support"],
+    title: "AI chatbots & automation",
+    description: "Conversational assistants and automation that reduce support load and automate routine work.",
+    points: ["FAQ automation", "Lead qualification", "Task orchestration"],
+  },
+  {
+    title: "Machine learning & data workflows",
+    description: "Predictive models, analytics pipelines, and BI that turn data into actionable insights.",
+    points: ["Data pipelines & ETL", "Custom ML models", "Dashboards & reporting"],
+  },
+  {
+    title: "API integrations & headless CMS",
+    description: "Connect your tools and content systems for flexible, future-proof digital products.",
+    points: ["Headless CMS setup", "Third-party API integrations", "Sync & automation"],
+  },
+  {
+    title: "SEO & content optimisation",
+    description: "Technical SEO, local search and content strategy to improve discoverability and organic traffic.",
+    points: ["Technical audits", "Local SEO", "Content planning"],
+  },
+  {
+    title: "Hosting, maintenance & support",
+    description: "Secure hosting, monitoring, backups and SLA-backed maintenance so your product stays reliable.",
+    points: ["Managed hosting", "Backups & monitoring", "Priority support plans"],
+  },
+  {
+    title: "Branding, UI/UX & product design",
+    description: "Conversion-first design systems and brand work that make products feel premium and usable.",
+    points: ["Design systems", "User research", "Prototype & testing"],
+  },
+  {
+    title: "Security & compliance",
+    description: "Application security reviews, hardening recommendations, and privacy guidance for peace of mind.",
+    points: ["Security audits", "Hardening & best practices", "Compliance guidance"],
   },
 ];
 
