@@ -80,6 +80,17 @@ export function AiConsultant() {
     return () => window.removeEventListener("brentiq-ai-consultant-open", handleOpen);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
   const sendMessage = async (text: string) => {
     const newMessage = { role: "user" as const, text };
     setMessages((prev) => {
@@ -150,8 +161,13 @@ export function AiConsultant() {
       </div>
 
       {open && (
-        <div className="mt-3 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-2xl shadow-slate-900/10">
-          <div className="mb-4 flex items-center justify-between">
+        <div
+          role="dialog"
+          aria-modal="true"
+          data-component="brentiq-ai-consultant-v2"
+          className="mt-3 h-[80vh] w-full max-w-md flex flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-2xl shadow-slate-900/10"
+        >
+          <div className="mb-4 flex items-center justify-between flex-shrink-0">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Consultant</p>
               <p className="text-sm font-semibold text-[var(--foreground)]">Brentiq AI Digital Consultant</p>
@@ -159,13 +175,14 @@ export function AiConsultant() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-soft)] text-[var(--foreground)] transition hover:bg-[var(--surface)]"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-soft)] text-[var(--foreground)] transition hover:bg-[var(--surface)] focus:outline-none focus:ring-2 focus:ring-cyan-300"
               aria-label="Close consultant"
             >
               ✕
             </button>
           </div>
-          <div id="ai-chat-scroll" ref={scrollRef} className="max-h-96 space-y-3 overflow-y-auto pr-1">
+
+          <div id="ai-chat-scroll" ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto space-y-3 pr-1 pb-4 touch-pan-y">
             {messages.map((message, index) => (
               <div key={index} className={message.role === "assistant" ? "rounded-3xl bg-slate-100 p-4 text-sm text-slate-900" : "rounded-3xl bg-cyan-400/10 p-4 text-sm text-[var(--foreground)]"}>
                 <p className="font-semibold uppercase tracking-[0.2em] text-xs text-slate-500">{message.role === "assistant" ? "Consultant" : "You"}</p>
@@ -174,84 +191,86 @@ export function AiConsultant() {
             ))}
           </div>
 
-          <div className="mt-4 grid gap-2">
-            {suggestedQuestions.map((question) => (
-              <button
-                key={question}
-                type="button"
-                onClick={() => handleQuestion(question)}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-3 text-left text-sm text-[var(--foreground)] transition hover:bg-[var(--surface)]"
-              >
-                {question}
-              </button>
-            ))}
-          </div>
+          <div className="mt-4 flex-shrink-0 space-y-4">
+            <div className="grid gap-2">
+              {suggestedQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  onClick={() => handleQuestion(question)}
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-3 text-left text-sm text-[var(--foreground)] transition hover:bg-[var(--surface)]"
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
 
-          <div className="mt-4 flex gap-2">
-            <input
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={(event) => event.key === "Enter" && handleSend()}
-              placeholder="Ask about your project, cost, or AI..."
-              className="flex-1 rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-3 text-sm text-[var(--foreground)] outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
-            />
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <input
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => event.key === "Enter" && handleSend()}
+                placeholder="Ask about your project, cost, or AI..."
+                className="flex-1 rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-3 text-sm text-[var(--foreground)] outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
+              />
+              <button
+                type="button"
+                onClick={handleSend}
+                className="inline-flex h-12 items-center justify-center rounded-2xl bg-cyan-400 px-4 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              >
+                Send
+              </button>
+            </div>
+
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
+              <p className="text-sm font-semibold text-[var(--foreground)]">Project estimator</p>
+              <p className="mt-2 text-sm text-muted">{leadSummary}</p>
+            </div>
+
+            {searchSummary && (
+              <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
+                <p className="text-sm font-semibold text-[var(--foreground)]">Live market research</p>
+                <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{searchSummary}</pre>
+              </div>
+            )}
+
+            {proposalSummary && (
+              <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
+                <p className="text-sm font-semibold text-[var(--foreground)]">Latest proposal</p>
+                <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{proposalSummary}</pre>
+              </div>
+            )}
+
             <button
               type="button"
-              onClick={handleSend}
-              className="inline-flex h-12 items-center justify-center rounded-2xl bg-cyan-400 px-4 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              onClick={() => setShowLeadForm((value) => !value)}
+              className="w-full rounded-2xl bg-[var(--surface-soft)] px-4 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface)]"
             >
-              Send
+              {showLeadForm ? "Hide lead form" : "Capture lead details"}
             </button>
+
+            {showLeadForm && (
+              <div className="space-y-3">
+                {Object.keys(defaultLeadInfo).map((key) => (
+                  <div key={key}>
+                    <label className="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{key.replace(/([A-Z])/g, " $1")}</label>
+                    <input
+                      value={leadInfo[key as keyof LeadInfo]}
+                      onChange={(event) => setLeadInfo((prev) => ({ ...prev, [key]: event.target.value }))}
+                      className="mt-1 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none"
+                    />
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setShowLeadForm(false)}
+                  className="w-full rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                >
+                  Save lead details
+                </button>
+              </div>
+            )}
           </div>
-
-          <div className="mt-4 rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
-            <p className="text-sm font-semibold text-[var(--foreground)]">Project estimator</p>
-            <p className="mt-2 text-sm text-muted">{leadSummary}</p>
-          </div>
-
-          {searchSummary && (
-            <div className="mt-4 rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
-              <p className="text-sm font-semibold text-[var(--foreground)]">Live market research</p>
-              <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{searchSummary}</pre>
-            </div>
-          )}
-
-          {proposalSummary && (
-            <div className="mt-4 rounded-3xl border border-[var(--border)] bg-[var(--surface-soft)] p-4">
-              <p className="text-sm font-semibold text-[var(--foreground)]">Latest proposal</p>
-              <pre className="mt-2 whitespace-pre-wrap text-sm text-muted">{proposalSummary}</pre>
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={() => setShowLeadForm((value) => !value)}
-            className="mt-4 w-full rounded-2xl bg-[var(--surface-soft)] px-4 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface)]"
-          >
-            {showLeadForm ? "Hide lead form" : "Capture lead details"}
-          </button>
-
-          {showLeadForm && (
-            <div className="mt-4 space-y-3">
-              {Object.keys(defaultLeadInfo).map((key) => (
-                <div key={key}>
-                  <label className="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{key.replace(/([A-Z])/g, " $1")}</label>
-                  <input
-                    value={leadInfo[key as keyof LeadInfo]}
-                    onChange={(event) => setLeadInfo((prev) => ({ ...prev, [key]: event.target.value }))}
-                    className="mt-1 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] outline-none"
-                  />
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => setShowLeadForm(false)}
-                className="w-full rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-              >
-                Save lead details
-              </button>
-            </div>
-          )}
         </div>
       )}
     </div>

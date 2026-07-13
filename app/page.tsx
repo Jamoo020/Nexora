@@ -64,13 +64,14 @@ export default function Home() {
                 key={service.title}
                 className="rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur service-card"
                 style={{
-                  backgroundImage: `url(${service.backgroundImage})`,
+                  backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.78), rgba(2, 6, 23, 0.78)), url(${service.backgroundImage})`,
+                  backgroundBlendMode: "overlay",
                 }}
               >
                 <div className="service-content" style={{ zIndex: 10 }}>
-                  <h3 className="text-xl font-semibold text-theme">{service.title}</h3>
-                  <p className="mt-4 text-muted">{service.description}</p>
-                  <ul className="mt-6 space-y-2 text-sm text-muted-strong">
+                  <h3 className="text-xl font-semibold text-white">{service.title}</h3>
+                  <p className="mt-4 text-slate-200">{service.description}</p>
+                  <ul className="mt-6 space-y-2 text-sm text-slate-300">
                     {service.points.map((point) => (<li key={point}>• {point}</li>))}
                   </ul>
                 </div>

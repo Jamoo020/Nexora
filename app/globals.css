@@ -105,6 +105,6 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 
 /* per-card background helper */
 .service-card { position: relative; overflow: hidden; background-size: cover; background-position: center; background-repeat: no-repeat; }
-.service-card::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 0; pointer-events: none; transition: background 0.4s ease; }
+.service-card::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.25); z-index: 0; pointer-events: none; transition: background 0.4s ease; }
 .service-card .service-content { position: relative; z-index: 10; }
-.service-card:hover::before { background: rgba(0, 0, 0, 0.28); }
+.service-card:hover::before { background: rgba(0, 0, 0, 0.22); }
