@@ -13,7 +13,7 @@ export default function SolutionsPage() {
     <main className="flex-1 bg-slate-950">
       <section className="border-b border-white/10 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.16),_transparent_45%)] py-24">
         <AnimatedBackground2 />
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 relative z-10">
           <SectionHeading eyebrow="Solutions" title="Premium digital systems engineered for Kenya's most ambitious companies." description="From polished websites to enterprise platforms and AI automation, every solution is built to perform, scale, and drive measurable business growth." />
           <div className="mt-12 grid gap-8 lg:grid-cols-2">
             {services.map((service) => (

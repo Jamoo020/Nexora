@@ -21,7 +21,7 @@ export default function Home() {
     <main className="flex-1">
       <section className="relative overflow-hidden border-b border-white/10 bg-hero">
         <AnimatedBackground />
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-32">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-32 relative z-10">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">Kenyan software development leader</p>
             <h1 className="mt-6 text-5xl font-semibold leading-tight text-white sm:text-6xl lg:text-7xl">Premium digital products for ambitious Kenyan businesses.</h1>
