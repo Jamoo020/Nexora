@@ -76,3 +76,20 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 [data-theme="light"] .to-slate-950 { --tw-gradient-to: rgba(226, 232, 240, 0.95) !important; }
 [data-theme="light"] .from-cyan-500\/20 { --tw-gradient-from: rgba(34, 211, 238, 0.2) !important; }
 [data-theme="light"] .text-cyan-300 { color: #0f766e !important; }
+
+/* Animated background helpers */
+.animated-bg { position: absolute; inset: 0; pointer-events: none; z-index: -10; overflow: hidden; }
+.animated-bg .blob { position: absolute; border-radius: 50%; filter: blur(42px); opacity: 0.7; mix-blend-mode: overlay; }
+.animated-bg .blob--a { width: 520px; height: 520px; left: -8%; top: -8%; background: radial-gradient(circle at 30% 30%, rgba(34,211,238,0.35), rgba(34,211,238,0.05)); animation: floatA 18s linear infinite; }
+.animated-bg .blob--b { width: 420px; height: 420px; right: -6%; top: 10%; background: radial-gradient(circle at 70% 70%, rgba(236,72,153,0.20), rgba(236,72,153,0.02)); animation: floatB 22s linear infinite; }
+.animated-bg .blob--c { width: 300px; height: 300px; left: 20%; bottom: -6%; background: radial-gradient(circle at 50% 50%, rgba(168,85,247,0.18), rgba(168,85,247,0.02)); animation: floatC 20s linear infinite; }
+
+@keyframes floatA { 0% { transform: translateY(0) translateX(0) scale(1);} 50% { transform: translateY(-24px) translateX(18px) scale(1.03);} 100% { transform: translateY(0) translateX(0) scale(1);} }
+@keyframes floatB { 0% { transform: translateY(0) translateX(0) scale(1);} 50% { transform: translateY(28px) translateX(-8px) scale(1.02);} 100% { transform: translateY(0) translateX(0) scale(1);} }
+@keyframes floatC { 0% { transform: translateY(0) translateX(0) scale(1);} 50% { transform: translateY(-18px) translateX(12px) scale(0.98);} 100% { transform: translateY(0) translateX(0) scale(1);} }
+
+/* Variant 2: subtle moving diagonal stripes */
+.animated-bg-2 { position: absolute; inset: 0; pointer-events: none; z-index: -10; overflow: hidden; }
+.animated-bg-2::before { content: ""; position: absolute; inset: -20%; background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(34,211,238,0.04) 10%, rgba(34,211,238,0.00) 25%, rgba(236,72,153,0.03) 60%, rgba(255,255,255,0.00) 100%); transform: translateX(0); animation: slide 30s linear infinite; }
+
+@keyframes slide { 0% { transform: translateX(-10%); } 50% { transform: translateX(10%); } 100% { transform: translateX(-10%); } }

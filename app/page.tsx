@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
 import { AiShowcase } from "@/components/ai-showcase";
+import AnimatedBackground from "@/components/animated-background";
 import { faqs, industries, processSteps, projects, services, stats, testimonials } from "@/lib/content";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <section className="relative overflow-hidden border-b border-white/10 bg-hero">
+        <AnimatedBackground />
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-32">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">Kenyan software development leader</p>
