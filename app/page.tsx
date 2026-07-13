@@ -59,12 +59,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {services.map((service, idx) => (
+            {services.map((service) => (
               <article
                 key={service.title}
-                className={`rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur service-card`}
+                className="rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur service-card"
                 style={{
-                  background: 'transparent',
+                  backgroundImage: `url(${service.backgroundImage})`,
                 }}
               >
                 <div className="service-content" style={{ zIndex: 10 }}>
@@ -74,9 +74,6 @@ export default function Home() {
                     {service.points.map((point) => (<li key={point}>• {point}</li>))}
                   </ul>
                 </div>
-                <style jsx>{`
-                  article[title="${service.title}"]::before { background-image: url('${service.backgroundImage}'); }
-                `}</style>
               </article>
             ))}
           </div>
