@@ -102,7 +102,10 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 /* helper variants */
 .section-bg-1 { background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1400&q=80'); }
 .section-bg-2 { background-image: url('/images/ybrent.jpg'); }
-.section-bg-why { background-image: url('/images/ybrent.jpg'); }
+.section-bg-why {
+  background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)), url('/images/ybrent.jpg');
+  background-blend-mode: screen;
+}
 
 /* per-card background helper */
 .service-card { position: relative; overflow: hidden; background-size: cover; background-position: center; background-repeat: no-repeat; }
