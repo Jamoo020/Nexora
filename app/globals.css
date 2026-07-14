@@ -108,12 +108,12 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
   background-blend-mode: normal;
 }
 
-/* Improve text contrast for the Why Brentiq section (use the site's bright cyan) */
+/* Improve text contrast for the Why Brentiq section (use a stronger cyan accent) */
 .section-bg-why.section-bg-image .section-content h2,
 .section-bg-why.section-bg-image .section-content p,
 .section-bg-why.section-bg-image h2,
 .section-bg-why.section-bg-image p {
-  color: #06b6d4 !important;
+  color: #22d3ee !important;
 }
 
 /* Keep card text readable (neutral) */
