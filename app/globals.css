@@ -96,7 +96,7 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 
 /* Image-backed section */
 .section-bg-image { position: relative; background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-image::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.55)); mix-blend-mode: multiply; z-index: 0; }
+.section-bg-image::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,6,23,0.4), rgba(2,6,23,0.4)); mix-blend-mode: multiply; z-index: 0; }
 .section-bg-image .section-content { position: relative; z-index: 10; }
 
 /* helper variants */
