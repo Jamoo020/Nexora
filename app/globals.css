@@ -96,11 +96,8 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 
 /* Image-backed section */
 .section-bg-image { position: relative; background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-image::before { content: ""; position: absolute; inset: 0; background: rgba(2, 6, 23, 0.86); z-index: 0; }
+.section-bg-image::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,6,23,0.65)); mix-blend-mode: multiply; z-index: 0; }
 .section-bg-image .section-content { position: relative; z-index: 10; }
-.section-bg-why .section-heading-title { color: #f8fafc !important; }
-.section-bg-why .section-heading-description { color: #cbd5e1 !important; }
-.section-bg-why .section-heading-eyebrow { color: #7dd3fc !important; }
 
 /* helper variants */
 .section-bg-1 { background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1400&q=80'); }
