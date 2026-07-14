@@ -55,17 +55,21 @@ export default function Home() {
 
       <AiShowcase />
 
-      <section className="section-bg-image section-bg-why py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 section-content">
+      <section className="bg-surface py-20">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {services.map((service) => (
               <article
                 key={service.title}
-                className="rounded-[24px] border border-white/10 bg-white/10 p-8 backdrop-blur-xl service-card"
+                className="rounded-[24px] border border-theme bg-surface-soft p-8 backdrop-blur service-card"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.78), rgba(2, 6, 23, 0.78)), url(${service.backgroundImage})`,
+                  backgroundBlendMode: "overlay",
+                }}
               >
                 <div className="service-content" style={{ zIndex: 10 }}>
-                  <h3 className="text-xl font-semibold text-slate-950 dark:text-white">{service.title}</h3>
+                  <h3 className="text-xl font-semibold text-white">{service.title}</h3>
                   <p className="mt-4 text-slate-200">{service.description}</p>
                   <ul className="mt-6 space-y-2 text-sm text-slate-300">
                     {service.points.map((point) => (<li key={point}>• {point}</li>))}
