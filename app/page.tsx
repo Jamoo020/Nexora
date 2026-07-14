@@ -55,8 +55,8 @@ export default function Home() {
 
       <AiShowcase />
 
-      <section className="bg-surface py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+      <section className="section-bg-image section-bg-why py-20">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 section-content">
           <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {services.map((service) => (
