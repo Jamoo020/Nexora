@@ -108,10 +108,10 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
   background-blend-mode: normal;
 }
 
-/* Improve text contrast for the Why Brentiq section (use the same cyan as eyebrow) */
+/* Improve text contrast for the Why Brentiq section (use the site's bright cyan) */
 .section-bg-why .section-content h2,
 .section-bg-why .section-content p {
-  color: #0f766e;
+  color: #06b6d4; /* bright cyan used for accents */
 }
 
 /* Keep card text readable (neutral) */
