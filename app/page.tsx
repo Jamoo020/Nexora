@@ -57,7 +57,7 @@ export default function Home() {
 
       <section className="section-bg-image section-bg-why py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 section-content">
-          <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." />
+          <SectionHeading eyebrow="Why Brentiq" title="A premium partner for companies that refuse to settle for ordinary technology." description="We blend strategy, product design, elegant engineering, and SEO intelligence into one high-performing digital experience." descriptionColor="#475569" />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {services.map((service) => (
               <article
