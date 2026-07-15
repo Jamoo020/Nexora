@@ -114,10 +114,16 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
   color: #22d3ee !important;
 }
 
-/* Make only the Why Brentiq description paragraph grey for contrast */
-.section-bg-why.section-bg-image .section-content > p,
-.section-bg-why.section-bg-image .section-content .section-heading-description {
-  color: #94a3b8 !important;
+/* Make only the Why Brentiq description paragraph darker grey for contrast */
+.section-bg-why.section-bg-image .section-content > p.section-heading-description,
+.section-bg-why.section-bg-image .section-content > p {
+  color: #475569 !important;
+}
+
+/* Keep dark theme readable: keep description light in dark mode */
+[data-theme="dark"] .section-bg-why.section-bg-image .section-content > p.section-heading-description,
+[data-theme="dark"] .section-bg-why.section-bg-image .section-content > p {
+  color: #f8fafc !important;
 }
 
 /* Keep card text readable (neutral) */
